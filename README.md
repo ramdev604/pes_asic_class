@@ -1,4 +1,11 @@
-# Commands to download the files
+
+
+This Repository Guides you to complete the ASIC flow from scratch (Faculty: Mahesh Awati, Guide: Kunal Ghosh)
+
+## The Lab files are present under the respective day folders 
+
+# Commands to install the necessary files
+
 ```
 sudo apt-get install vim -y #installs vim editor with "Yes" for all permissions that will be requested while doing the task
 sudo apt-get install autoconf -y #tool to generate configure script
