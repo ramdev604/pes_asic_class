@@ -1,52 +1,58 @@
-# DAY 1
-## ->C program That calculates sum from 1 to N
-____Compiling it using C compiler____
+# Commands to download the files
 ```
-gcc sum1ton.c 
-./a.out
+sudo apt-get install vim -y #installs vim editor with "Yes" for all permissions that will be requested while doing the task
+sudo apt-get install autoconf -y #tool to generate configure script
+sudo apt-get install automake -y #tool to generate makefiles(to build software)
+sudo apt-get install autotools-dev -y #development files for above autotool suites
+sudo apt-get install curl -y #transfer data using URL(HTTPS,FTP)
+sudo apt-get install libmpc-dev libmpfr-dev libgmp-dev -y #for arbitrary precision arithmetic on FP,Int, etc
+sudo apt-get install gawk -y #text processing
+sudo apt-get install build-essential -y #package of essential tools for building softwares
+sudo apt-get install bison flex -y #to tokenize input streams
+sudo apt-get install texinfo gperf -y #generate formatted manuals and perfect hash functions
+sudo apt-get install -y #library support script used to manage dynamic libraries
+sudo apt-get install patchutils bc -y 
+sudo apt-get install zlib1g-dev libexpat1-dev -y #development files for zlib and xml libraries
+sudo apt-get install git -y
+sudo apt-get install gtkwave -y #Waveform viewer
+cd
+pwd=$PWD
+mkdir riscv_toolchain
+cd riscv_toolchain
+wget "https://static.dev.sifive.com/dev-tools/riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14.tar.gz"
+tar -xvzf riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14.tar.gz #extract contents of tar file
+export PATH=$pwd/riscv_toolchain/riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14/bin:$PATH #adding path to the environment
+sudo apt-get install device-tree-compiler -y #tool used to compile and decompile device tree source files, which are used to describe hardware components in a system in a platform-independent manner.
+git clone https://github.com/riscv/riscv-isa-sim.git
+cd riscv-isa-sim/ #enter into the cloned directory
+mkdir build #directory to configure isa-simulator
+cd build
+../configure --prefix=$pwd/riscv_toolchain/riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14
+make -j 4 #allocate 4 threads for parallel process
+sudo make install
+cd ~/riscv_toolchain
+git clone https://github.com/riscv/riscv-pk.git #ISC-V Proxy Kernel, a thin software layer that acts as a bridge between a RISC-V application and the underlying hardware. It provides a basic environment for running user-level software on RISC-V systems. The primary purpose of riscv-pk is to provide an execution environment for RISC-V programs that are compiled to run in user mode.
+cd riscv-pk/
+mkdir build
+cd build/
+../configure --prefix=$pwd/riscv_toolchain/riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14 --host=riscv64-unknown-elf
+make -j 4
+sudo make install
+export PATH=$pwd/riscv_toolchain/riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14/riscv64-unknown-elf/bin:$PATH
+cd $pwd/riscv_toolchain
+git clone https://github.com/steveicarus/iverilog.git #opensource HDL simulator
+cd iverilog/
+git checkout --track -b v10-branch origin/v10-branch 
+git pull 
+chmod 777 autoconf.sh #chmod - command to change permissions ; 777 - owner,group,others - read,write,execute permission enabled
+./autoconf.sh
+
+./configure
+make -j 4
+sudo make install
+echo 'export PATH=~/riscv_toolchain/riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14/bin:$PATH' >> ~/.bashrc
+echo 'export PATH=~/riscv_toolchain/riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14/riscv64-unknown-elf/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+
 ```
-![sum1ton](https://github.com/ramdev604/pes_asic_class/assets/43489027/e8bd87eb-8e11-4623-a420-0eefff9888cc)
-
-____Compiling using RISCV compiler____
-```
-riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c
-spike pk sum1ton.o
-riscv64-unknown-elf-objdump -d 1_to_N.o | less (in new tab)
-```
-![spike1](https://github.com/ramdev604/pes_asic_class/assets/43489027/ae1e51b5-80fd-4633-8f3b-6884fbaf1316)
-
-## -> Write a C program for Signed And Unsigned Numbers 
-![unsigned](https://github.com/ramdev604/pes_asic_class/assets/43489027/474784ca-5318-4a01-abd9-995b25a5eaff)
-
-
-
-```
-vim unsignedHighest.c
-riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o unsignedHighest.o unsignedHighest.c
-spike pk unsignedHighest.o
-```
-![WhatsApp Image 2023-08-21 at 22 56 11](https://github.com/ramdev604/pes_asic_class/assets/43489027/55e39c44-6d41-405c-b23c-ce8dd7204f6d)
-
-
-
-
-
-## For the signed number 
-
-  ![3](https://github.com/ramdev604/pes_asic_class/assets/43489027/dcecc5ae-fe61-4a96-bab9-8889851ad0fe)
-
-
-
-```
-vim signedHighest.c
-riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o signedHighest.o signedHighest.c
-spike pk signedHighest.o
-```
-
-![4](https://github.com/ramdev604/pes_asic_class/assets/43489027/5e15b6ff-edb2-43c4-acce-e382fc390a72)
-
-
-
-
-
 
