@@ -2,13 +2,14 @@
 
 This Repository Guides you to complete the ASIC flow from scratch (Faculty: Mahesh Awati, Guide: Kunal Ghosh)
 
-# DAY 1
+# Lab 1
 ## ->C program That calculates sum from 1 to N
 ____Compiling it using C compiler____
 ```
 gcc sum1ton.c 
 ./a.out
 ```
+
 ![sum1ton](https://github.com/ramdev604/pes_asic_class/assets/43489027/e8bd87eb-8e11-4623-a420-0eefff9888cc)
 
 ____Compiling using RISCV compiler____
@@ -17,6 +18,8 @@ riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c
 spike pk sum1ton.o
 riscv64-unknown-elf-objdump -d 1_to_N.o | less (in new tab)
 ```
+## Spike Simulation
+
 ![spike1](https://github.com/ramdev604/pes_asic_class/assets/43489027/ae1e51b5-80fd-4633-8f3b-6884fbaf1316)
 
 ## -> Write a C program for Signed And Unsigned Numbers 
@@ -49,7 +52,7 @@ spike pk signedHighest.o
 
 ![4](https://github.com/ramdev604/pes_asic_class/assets/43489027/5e15b6ff-edb2-43c4-acce-e382fc390a72)
 
-# Day 2: Introduction to ABI and basic verification flow
+# Lab 2: Introduction to ABI and basic verification flow
 
 
 
@@ -76,6 +79,8 @@ riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o 1to9_custom.o 1to9_cus
 spike pk 1to9_custom.o
 riscv64-unknown-elf-objdump -d 1to9_custom.o | less
 ```
+
+## Spike Simulation
 
 ![Screenshot from 2023-08-21 09-10-32](https://github.com/ramdev604/pes_asic_class/assets/43489027/64e49c93-a6e6-42f4-a187-1c789809ce21)
 
