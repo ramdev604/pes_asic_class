@@ -201,5 +201,36 @@ gtkwave tb_dff_syncres.vcd
 ```
 ![GTK4](https://github.com/ramdev604/pes_asic_class/assets/43489027/c18cf3c9-ac8a-48c2-bc30-ca150a926f06)
 
+## Task 4
+### Synthesizing all 3 codes using yosys
 
+```
+yosys
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog dff_asyncres.v
+synth -top dff_asyncres
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+abc -liberty ../lib//sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+```
+![yosys3](https://github.com/ramdev604/pes_asic_class/assets/43489027/20574c1f-0f00-470b-bc64-0c113fb19d9a)
+![yosys4](https://github.com/ramdev604/pes_asic_class/assets/43489027/fc768d3e-11df-4167-b955-fb25e1ca9ebc)
+
+```
+read_verilog dff_async_set.v
+synth -top dff_async_set
+dfflibmap -liberty ../lib//sky130_fd_sc_hd__tt_025C_1v80.lib
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+```
+![yosys5](https://github.com/ramdev604/pes_asic_class/assets/43489027/6da8c888-5126-4150-967b-02fd0eb09321)
+
+```
+read_verilog dff_syncres.v
+synth -top dff_syncres
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+```
+![yosys6](https://github.com/ramdev604/pes_asic_class/assets/43489027/36ffdba6-d323-4b7c-b35a-2d1335590fc0)
 
