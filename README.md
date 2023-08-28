@@ -1,9 +1,14 @@
-
-
 This Repository Guides you to complete the ASIC flow from scratch (Faculty: Mahesh Awati, Guide: Kunal Ghosh)
 
-# Lab 1
-## ->C program That calculates sum from 1 to N
+# Lab Classes 
+
+<details>
+  <summary> Week 1 : Day 1: Introduction to RISCV ISA and GNU Compiler Toolchain </summary>
+  <br>
+
+
+
+## C program That calculates sum from 1 to N
 ____Compiling it using C compiler____
 ```
 gcc sum1ton.c 
@@ -22,7 +27,7 @@ riscv64-unknown-elf-objdump -d 1_to_N.o | less (in new tab)
 
 ![spike1](https://github.com/ramdev604/pes_asic_class/assets/43489027/ae1e51b5-80fd-4633-8f3b-6884fbaf1316)
 
-## -> Write a C program for Signed And Unsigned Numbers 
+## Write a C program for Signed And Unsigned Numbers 
 ![unsigned](https://github.com/ramdev604/pes_asic_class/assets/43489027/474784ca-5318-4a01-abd9-995b25a5eaff)
 
 
@@ -51,10 +56,13 @@ spike pk signedHighest.o
 ```
 
 ![4](https://github.com/ramdev604/pes_asic_class/assets/43489027/5e15b6ff-edb2-43c4-acce-e382fc390a72)
+</details>
 
-# Lab 2: Introduction to ABI and basic verification flow
+<details>
+  <summary> Week 1 : Day 2 - Introduction to ABI and Basic Verification Flow </summary>
+  <br>
 
-
+# Introduction to ABI and basic verification flow
 
 ### Download the load.S , 1to9_count.c files from 
 https://github.com/kunalg123/riscv_workshop_collaterals/tree/master/labs
@@ -83,6 +91,45 @@ riscv64-unknown-elf-objdump -d 1to9_custom.o | less
 ## Spike Simulation
 
 ![Screenshot from 2023-08-21 09-10-32](https://github.com/ramdev604/pes_asic_class/assets/43489027/64e49c93-a6e6-42f4-a187-1c789809ce21)
+</details>
+
+<details>
+  <summary> Week 2 : Day 1 - Introduction to Verilog RTL design and Synthesis</summary>
+  <br>
+
+## Task 1
+## Loading a mux and it's testbench into iverilog 
+  ```
+    sudo -i
+    cd /home
+    cd ramdev
+    cd VLSI
+    cd sky130RTLDesignAndSynthesisWorkshop
+    cd verilog_files
+  ```
+![gtk](https://github.com/ramdev604/pes_asic_class/assets/43489027/66d33e8d-f382-48ed-8b72-9988a1de738d)
+
+![GTK1](https://github.com/ramdev604/pes_asic_class/assets/43489027/58800e3e-ea20-47cb-b6ff-57cca7781373)
+
+## Task 2
+## Labs using Yosys and Sky130 PDKs
+
+```
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog good_mux.v
+synth -top good_mux 
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+```
+![yosys](https://github.com/ramdev604/pes_asic_class/assets/43489027/785a7786-3069-49f5-ae7a-bec890e9bb14)
+
+![yosys1](https://github.com/ramdev604/pes_asic_class/assets/43489027/48dbaf4a-f863-45fb-8caa-d5ed151e9749)
+
+## Writing a netlist for the verilog code
+![yosys2](https://github.com/ramdev604/pes_asic_class/assets/43489027/a7349e48-c321-4551-b50d-5d1ebb223bc4)
+![yosys3](https://github.com/ramdev604/pes_asic_class/assets/43489027/422411fc-9ac3-48c3-a4b2-c47e569d439d)
+![yosys4](https://github.com/ramdev604/pes_asic_class/assets/43489027/09531182-0212-463e-a6c1-2d60823eaa8f)
+![yosys5](https://github.com/ramdev604/pes_asic_class/assets/43489027/217e8779-951f-4b4f-832f-e910dcea8f61)
 
 
 
