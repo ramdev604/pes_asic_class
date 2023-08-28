@@ -130,6 +130,55 @@ show
 ![yosys3](https://github.com/ramdev604/pes_asic_class/assets/43489027/422411fc-9ac3-48c3-a4b2-c47e569d439d)
 ![yosys4](https://github.com/ramdev604/pes_asic_class/assets/43489027/09531182-0212-463e-a6c1-2d60823eaa8f)
 ![yosys5](https://github.com/ramdev604/pes_asic_class/assets/43489027/217e8779-951f-4b4f-832f-e910dcea8f61)
+</details>
+
+<details>
+  <summary> Week 2 : Day 2  Timing libs, hierarchical vs flat synthesis and efficient flop coding styles </summary>
+  <br>
+
+## Introduction to .lib
+
+## Task 1
+### Command to invoke sky130_fd_sc_hd__tt_025C_1v80.lib file 
+
+```
+ vim ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+```
+
+![T1_1](https://github.com/ramdev604/pes_asic_class/assets/43489027/f4dad528-775e-4d81-ade2-478881e7b74e)
+![T1_2](https://github.com/ramdev604/pes_asic_class/assets/43489027/f2381deb-d0ee-4333-aee2-0daded1f5bad)
+![T1_3](https://github.com/ramdev604/pes_asic_class/assets/43489027/8ffd0c36-f3d2-4f4f-b0e6-02088b677bfe)
+![T1_4](https://github.com/ramdev604/pes_asic_class/assets/43489027/d596dcda-df77-4493-b899-dd9a2c7fbad1)
+
+## Task 2
+## Hier synthesis flat synthesis 
+
+```
+yosys
+read_liberty -lib ../lib//sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog multiple_modules.v
+synth -top multiple_modules
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show multiple_modules
+```
+![yosys1](https://github.com/ramdev604/pes_asic_class/assets/43489027/35b51b32-b8a7-460d-be27-fdb1c72e84a7)
+![yosys2](https://github.com/ramdev604/pes_asic_class/assets/43489027/621d0260-b681-4541-9c50-2ab36208be5c)
+
+```
+write_verilog multiple_modules_hier.v
+!vim multiple_modules_hier.v 
+```
+![T2_1](https://github.com/ramdev604/pes_asic_class/assets/43489027/be2f74ac-9e20-4bc1-8333-59d82eb4cc1d)
+![T2_2](https://github.com/ramdev604/pes_asic_class/assets/43489027/1861bbee-4e6b-4597-a85f-b71e601c6453)
+
+## Task 3
+
+## Various Flop Coding Styles and optimization
+
+### For asynchronous reset
+
+
+
 
 
 
