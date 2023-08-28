@@ -3,7 +3,7 @@ This Repository Guides you to complete the ASIC flow from scratch (Faculty: Mahe
 # Lab Classes 
 
 <details>
-  <summary> Week 1 : Day 1: Introduction to RISCV ISA and GNU Compiler Toolchain </summary>
+  <summary> Week 1 : Day 1 - Introduction to RISCV ISA and GNU Compiler Toolchain </summary>
   <br>
 
 
@@ -133,7 +133,7 @@ show
 </details>
 
 <details>
-  <summary> Week 2 : Day 2  Timing libs, hierarchical vs flat synthesis and efficient flop coding styles </summary>
+  <summary> Week 2 : Day 2 - Timing libs, hierarchical vs flat synthesis and efficient flop coding styles </summary>
   <br>
 
 ## Introduction to .lib
@@ -176,9 +176,30 @@ write_verilog multiple_modules_hier.v
 ## Various Flop Coding Styles and optimization
 
 ### For asynchronous reset
+```
+iverilog dff_asyncres.v tb_dff_asyncres.v
+./a.out
+gtkwave tb_dff_asyncres.vcd 
+```
+![GTK1](https://github.com/ramdev604/pes_asic_class/assets/43489027/3e7479ed-f378-44b5-ad33-ac575d35e8c0)
 
+![GTK2](https://github.com/ramdev604/pes_asic_class/assets/43489027/3f973171-b9a8-48a9-aa19-6c613fbd8547)
 
+### For asynchronous set
+```
+iverilog dff_async_set.v tb_dff_async_set.v
+./a.out
+gtkwave tb_dff_async_set.vcd
+```
+![GTK3](https://github.com/ramdev604/pes_asic_class/assets/43489027/39762c4c-4222-419d-a803-e71cf9120539)
 
+### For Synchronous reset
+```
+iverilog dff_syncres.v tb_dff_syncres.v
+./a.out
+gtkwave tb_dff_syncres.vcd 
+```
+![GTK4](https://github.com/ramdev604/pes_asic_class/assets/43489027/c18cf3c9-ac8a-48c2-bc30-ca150a926f06)
 
 
 
