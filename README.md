@@ -235,4 +235,212 @@ abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 show
 ```
 ![yosys6](https://github.com/ramdev604/pes_asic_class/assets/43489027/36ffdba6-d323-4b7c-b35a-2d1335590fc0)
+</details>
 
+<details>
+  <summary> Day 3 - Combinational and Sequential Optimizations </summary>
+  <br>
+
+# Introduction to optimizations
+## Combinational logic optimizations
+**opt_check1.v**
+```
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+read_verilog opt_check.v
+synth -top opt_check
+opt_clean -purge
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+```
+![d3_1](https://github.com/ramdev604/pes_asic_class/assets/43489027/720c5d35-658d-44ce-b783-d5a0bbe86c43)
+
+**opt_check2.v**
+```
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+read_verilog opt_check2.v
+synth -top opt_check2
+opt_clean -purge
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+```
+![d3_2](https://github.com/ramdev604/pes_asic_class/assets/43489027/dfef47fa-e098-4169-ba53-3e8a6496eaa5)
+
+
+**opt_check3.v**
+
+```
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+read_verilog opt_check3.v
+synth -top opt_check3
+opt_clean -purge
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+```
+![d3_3](https://github.com/ramdev604/pes_asic_class/assets/43489027/b73fb517-2326-4d47-a84e-9150dac46db1)
+
+**multiple_module_opt.v**
+```
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+read_verilog multiple_module_opt.v
+synth -top multiple_module_opt
+flatten
+opt_clean -purge
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+```
+![d3_4](https://github.com/ramdev604/pes_asic_class/assets/43489027/b23df09a-3e79-4a4c-8a6e-76aae68ba1f0)
+
+# Sequential logic optimizations
+**dff_const1.v**
+
+```
+iverilog dff_const1.v tb_dff_const1.v
+./a.out
+gtkwave tb_dff_const1.vcd
+```
+![diff_term](https://github.com/ramdev604/pes_asic_class/assets/43489027/80f2ea14-7c70-482a-8f8e-2b8b76e66b8b)
+![diff1_gtk](https://github.com/ramdev604/pes_asic_class/assets/43489027/cd615e5b-9e2d-4250-8b67-b1dfb5fc416c)
+
+
+**Synthesis**
+```
+  read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+  read_verilog dff_const1.v
+  synth -top dff_const1
+  dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+  abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+  show
+```
+![diff1_yosys](https://github.com/ramdev604/pes_asic_class/assets/43489027/0e5fac57-121a-4341-a4de-99ba74871b1c)
+
+**dff_const2.v**
+``` v
+module dff_const2(input clk, input reset, output reg q);
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+		q <= 1'b1;
+	else
+		q <= 1'b1;
+end
+
+endmodule
+```
+**Simulate**
+```
+iverilog dff_const1.v tb_dff_const2.v
+./a.out
+gtkwave tb_dff_const2.vcd
+```
+![diff2_gtk](https://github.com/ramdev604/pes_asic_class/assets/43489027/a4feb46c-82bb-4919-b5a8-e156d92a85fe)
+
+
+**Synthesis**
+```
+  read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+  read_verilog dff_const2.v
+  synth -top dff_const2
+  dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+  abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+  show
+```
+![diff2_yosys](https://github.com/ramdev604/pes_asic_class/assets/43489027/50871366-9725-4080-a99a-f8aa9f3934fe)
+
+**dff_const3.v**
+``` v
+module dff_const3(input clk, input reset, output reg q);
+reg q1;
+
+always @(posedge clk, posedge reset)
+begin
+	if(reset)
+	begin
+		q <= 1'b1;
+		q1 <= 1'b0;
+	end
+	else
+	begin
+		q1 <= 1'b1;
+		q <= q1;
+	end
+end
+
+endmodule
+```
+
+**Simulate**
+```
+iverilog dff_const3.v tb_dff_const2.v
+./a.out
+gtkwave tb_dff_const3.vcd
+```
+![diff3_term](https://github.com/ramdev604/pes_asic_class/assets/43489027/1fbd83d9-44cb-40c4-9709-20245fcbde73)
+![diff3_gtk](https://github.com/ramdev604/pes_asic_class/assets/43489027/fe97d6f2-4ceb-414c-9d64-209dcc73b88b)
+
+
+**Synthesis**
+```
+  read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+  read_verilog dff_const3.v
+  synth -top dff_const3
+  dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+  abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+  show
+```
+![diff3_yosys](https://github.com/ramdev604/pes_asic_class/assets/43489027/c8aa6825-ccee-447d-b900-5e042bc7de6e)
+
+# Sequential optimzations for unused outputs
+**counter_opt.v**
+``` v
+module counter_opt (input clk , input reset , output q);
+reg [2:0] count;
+assign q = count[0];
+
+always @(posedge clk ,posedge reset)
+begin
+	if(reset)
+		count <= 3'b000;
+	else
+		count <= count + 1;
+end
+
+endmodule
+```
+**Synthesis**
+```
+  read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+  read_verilog counter_opt.v
+  synth -top counter_opt
+  dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+  abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+  show
+```
+
+![counter1](https://github.com/ramdev604/pes_asic_class/assets/43489027/9ca788d8-df6c-42ec-8c38-7e7365847835)
+
+**counter_opt2.v**
+``` v
+module counter_opt (input clk , input reset , output q);
+reg [2:0] count;
+assign q = (count[2:0] == 3'b100);
+
+always @(posedge clk ,posedge reset)
+begin
+	if(reset)
+		count <= 3'b000;
+	else
+		count <= count + 1;
+end
+
+endmodule
+```
+**Synthesis**
+```
+  read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib  
+  read_verilog counter_opt2.v
+  synth -top counter_opt
+  dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+  abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+  show
+```
+![counter2](https://github.com/ramdev604/pes_asic_class/assets/43489027/24099692-4d86-4a73-b2de-0c1b91746b4a)
