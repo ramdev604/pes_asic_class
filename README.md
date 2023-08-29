@@ -3,7 +3,7 @@ This Repository Guides you to complete the ASIC flow from scratch (Faculty: Mahe
 # Lab Classes 
 # COURSE 
 <details>
-  <summary> Week 1 : Day 1 - Introduction to RISCV ISA and GNU Compiler Toolchain </summary>
+  <summary> Day 1 - Introduction to RISCV ISA and GNU Compiler Toolchain </summary>
   <br>
 
 
@@ -59,7 +59,7 @@ spike pk signedHighest.o
 </details>
 
 <details>
-  <summary> Week 1 : Day 2 - Introduction to ABI and Basic Verification Flow </summary>
+  <summary> Day 2 - Introduction to ABI and Basic Verification Flow </summary>
   <br>
 
 # Introduction to ABI and basic verification flow
@@ -96,7 +96,7 @@ riscv64-unknown-elf-objdump -d 1to9_custom.o | less
 #  RTL design using Verilog with SKY130 Technology 
 
 <details>
-  <summary> Week 2 : Day 1 - Introduction to Verilog RTL design and Synthesis</summary>
+  <summary> Day 1 - Introduction to Verilog RTL design and Synthesis</summary>
   <br>
 
 ## Task 1
@@ -135,7 +135,7 @@ show
 </details>
 
 <details>
-  <summary> Week 2 : Day 2 - Timing libs, hierarchical vs flat synthesis and efficient flop coding styles </summary>
+  <summary> Day 2 - Timing libs, hierarchical vs flat synthesis and efficient flop coding styles </summary>
   <br>
 
 ## Introduction to .lib
