@@ -1,7 +1,7 @@
 This Repository Guides you to complete the ASIC flow from scratch (Faculty: Mahesh Awati, Guide: Kunal Ghosh)
 
 # Lab Classes 
-
+# COURSE 
 <details>
   <summary> Week 1 : Day 1 - Introduction to RISCV ISA and GNU Compiler Toolchain </summary>
   <br>
@@ -92,6 +92,8 @@ riscv64-unknown-elf-objdump -d 1to9_custom.o | less
 
 ![Screenshot from 2023-08-21 09-10-32](https://github.com/ramdev604/pes_asic_class/assets/43489027/64e49c93-a6e6-42f4-a187-1c789809ce21)
 </details>
+
+#  RTL design using Verilog with SKY130 Technology 
 
 <details>
   <summary> Week 2 : Day 1 - Introduction to Verilog RTL design and Synthesis</summary>
