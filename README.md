@@ -444,3 +444,125 @@ endmodule
   show
 ```
 ![counter2](https://github.com/ramdev604/pes_asic_class/assets/43489027/24099692-4d86-4a73-b2de-0c1b91746b4a)
+</details>
+
+<details>
+  <summary> Day 4 - GLS and Synthesis-Simulation Mismatch </summary>
+  <br>
+	
+**ternary_operator_mux.v**
+	
+**Simulation**
+```
+iverilog ternary_operator_mux.v tb_ternary_operator_mux.v
+./a.out
+gtkwave tb_ternary_operator_mux.vcd
+```
+![ter1_term](https://github.com/ramdev604/pes_asic_class/assets/43489027/900a9cb5-85e2-4797-a165-c27af974e889)
+![ter1_gtk](https://github.com/ramdev604/pes_asic_class/assets/43489027/9e39892c-8035-4dc9-b1d4-d8c132062e73)
+
+
+**Synthesis**
+```
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog ternary_operator_mux.v
+synth -top ternary_operator_mux
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+write_verilog -noattr ternary_operator_mux_netlist.v
+show
+```
+![ter1_yosys](https://github.com/ramdev604/pes_asic_class/assets/43489027/9ecade19-4573-47bd-a784-b95b41c5d007)
+
+**GLS**
+To to Gate level simulation, Invoke iverilog with verilog modules
+```
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v ternary_operator_mux_netlist.v tb_ternary_operator_mux.v
+./a.out
+gtkwave tb_ternary_operator_mux.vcd
+```
+![gls_gtk](https://github.com/ramdev604/pes_asic_class/assets/43489027/ee6d00a6-a190-4175-8610-a64ba8d04e76)
+
+
+** bad_mux.v**
+``` v
+module bad_mux (input i0 , input i1 , input sel , output reg y);
+always @ (sel)
+begin
+	if(sel)
+		y <= i1;
+	else 
+		y <= i0;
+end
+endmodule
+```
+**RTL Simulation**
+```
+iverilog bad_mux.v tb_bad_mux.v
+./a.out
+gtkwave tb_bad_mux.vcd
+```
+![badmux_gtk](https://github.com/ramdev604/pes_asic_class/assets/43489027/7e64326e-938b-4583-83bd-260292e9b3c6)
+
+
+**Synthesis**
+```
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog bad_mux.v
+synth -top bad_mux
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+write_verilog -noattr bad_mux_netlist.v
+show
+```
+![badmux_yosys](https://github.com/ramdev604/pes_asic_class/assets/43489027/ae127ec8-bd43-4a55-9083-e6e302576271)
+
+**GLS**
+To to Gate level simulation, Invoke iverilog with verilog modules
+```
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v bad_mux_netlist.v tb_bad_mux.v
+./a.out
+gtkwave tb_bad_mux.vcd
+```
+
+![gls2_gtk](https://github.com/ramdev604/pes_asic_class/assets/43489027/fe4107c6-f85f-4c5c-bbd9-082a19b3b459)
+
+# Labs on synth-sim mismatch for blocking statement
+**blocking_caveat.v**
+``` v
+module blocking_caveat (input a , input b , input  c, output reg d); 
+reg x;
+always @ (*)
+begin
+	d = x & c;
+	x = a | b;
+end
+endmodule
+```
+**RTL Simulation**
+```
+iverilog blocking_caveat.v tb_blocking_caveat.v
+./a.out
+gtkwave tb_blocking_caveat.vcd
+```
+![rtl2_gtk](https://github.com/ramdev604/pes_asic_class/assets/43489027/ec56e77f-bc8a-4c5d-be56-db092c227c9f)
+
+
+**Synthesis**
+```
+read_liberty -lib ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog blocking_caveat.v
+synth -top blocking_caveat
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+write_verilog -noattr blocking_caveat_netlist.v
+show
+```
+![rtl2_yosys](https://github.com/ramdev604/pes_asic_class/assets/43489027/747247e3-8cde-4b4e-879e-1eb12f024f0d)
+
+**GLS**
+To to Gate level simulation, Invoke iverilog with verilog modules
+```
+iverilog ../my_lib/verilog_model/primitives.v ../my_lib/verilog_model/sky130_fd_sc_hd.v blocking_caveat_netlist.v tb_blocking_caveat.v
+./a.out
+gtkwave tb_blocking_caveat.vcd
+```
+
+![gls3_gtk](https://github.com/ramdev604/pes_asic_class/assets/43489027/2fc51442-4c1a-4441-b32d-75f02c820278)
