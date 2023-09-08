@@ -1,7 +1,7 @@
 This Repository Guides you to complete the ASIC flow from scratch (Faculty: Mahesh Awati, Guide: Kunal Ghosh)
 
 # Lab Classes 
-# COURSE 
+# Week 1
 <details>
   <summary> Day 1 - Introduction to RISCV ISA and GNU Compiler Toolchain </summary>
   <br>
