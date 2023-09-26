@@ -568,4 +568,3 @@ gtkwave tb_blocking_caveat.vcd
 ![gls3_gtk](https://github.com/ramdev604/pes_asic_class/assets/43489027/2fc51442-4c1a-4441-b32d-75f02c820278)
 </details>
 
-# Advanced Physical Design using OpenLANE/SKY130
